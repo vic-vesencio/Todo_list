@@ -6,6 +6,7 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 import Tasks from './components/Task';
 
 //context
+import AppContext from './context/AppContext';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
@@ -17,42 +18,38 @@ export default function App() {
     setTasks(newTasks);
   }
 
-  const removeTask = (index) => {
-    let newTasks = [...tasks];
-    newTasks.splice(index, 1);
-    setTasks(newTasks);
-  }
-
   return (
-    <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>ur tasks:</Text>
-      </View>
-      <View style={styles.tasksContainer}>
-        {tasks.length !== 0 ?
-          tasks.map((task,index)=>{
-            return(
-              <Tasks key={index} props={{taskName: task.taskName, index: index}}></Tasks>
-            )
-          })
-        :
-          <Text> No tasks yet </Text>
-        }
-      </View>
-      <View style={styles.inputContainer}>
-        <TextInput value={inputVal} style={styles.input}
-        onChangeText={text=>{
-          setInputVal(text);
-        }}
-        />
-        <TouchableOpacity style={styles.button}
-          onPress={()=>{
-            if(inputVal !== '') addTask(inputVal);
+    <AppContext.Provider value={{tasks, setTasks}}>
+      <View style={styles.container}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>ur tasks:</Text>
+        </View>
+        <View style={styles.tasksContainer}>
+          {tasks.length !== 0 ?
+            tasks.map((task,index)=>{
+              return(
+                <Tasks key={index} props={{taskName: task.taskName, index: index}}></Tasks>
+              )
+            })
+          :
+            <Text> No tasks yet </Text>
+          }
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput value={inputVal} style={styles.input}
+          onChangeText={text=>{
+            setInputVal(text);
           }}
-        />
+          />
+          <TouchableOpacity style={styles.button}
+            onPress={()=>{
+              if(inputVal !== '') addTask(inputVal);
+            }}
+          />
+        </View>
+        <StatusBar />
       </View>
-      <StatusBar />
-    </View>
+    </AppContext.Provider>
   );
 }
 

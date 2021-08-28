@@ -1,13 +1,23 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
+//context
+import AppContext from '../context/AppContext';
+
 const Task = ({props}) => {
+   const newAppCOntext = useContext(AppContext);
+   const removeTask = (index) => {
+      let newTasks = [...newAppCOntext.tasks];
+      newTasks.splice(index, 1);
+      newAppCOntext.setTasks(newTasks);
+   }
+
    return(
       <View style={styles.item}>
          <TouchableOpacity style={styles.square}>
          </TouchableOpacity>
          <Text style={styles.text}>{props.taskName}</Text>
-         <TouchableOpacity style={styles.circle}>
+         <TouchableOpacity onPress={()=>removeTask(props.index)} style={styles.circle}>
          </TouchableOpacity>
       </View>
    )
