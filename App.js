@@ -8,7 +8,7 @@ import Tasks from './components/Task';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}><b>ur tasks:</b></Text>
+      <Text style={styles.title}>ur tasks:</Text>
       <View style={styles.tasksContainer}>
         <Tasks props={{taskName: 'task #1'}}></Tasks>
         <Tasks props={{taskName: 'task #2'}}></Tasks>
@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
   },
   title:{
     fontSize: 24,
+    fontWeight: 'bold',
     marginLeft: '5%',
     marginRight: '5%',
     marginTop: '5%',
