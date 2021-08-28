@@ -5,6 +5,8 @@ import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-nativ
 //custom components
 import Tasks from './components/Task';
 
+//context
+
 export default function App() {
   const [tasks, setTasks] = useState([]);
   const [inputVal, setInputVal] = useState('');
@@ -12,6 +14,12 @@ export default function App() {
   const addTask = (taskName) =>{
     let newTasks = [...tasks];
     newTasks.push({taskName: taskName});
+    setTasks(newTasks);
+  }
+
+  const removeTask = (index) => {
+    let newTasks = [...tasks];
+    newTasks.splice(index, 1);
     setTasks(newTasks);
   }
 
@@ -24,7 +32,7 @@ export default function App() {
         {tasks.length !== 0 ?
           tasks.map((task,index)=>{
             return(
-              <Tasks key={index} props={{taskName: task.taskName}}></Tasks>
+              <Tasks key={index} props={{taskName: task.taskName, index: index}}></Tasks>
             )
           })
         :
