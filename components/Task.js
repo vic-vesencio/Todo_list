@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
       borderRadius: 5
    },
    circle:{
-      width: 12,
-      height: 12,
+      width: 20,
+      height: 20,
       borderColor: 'blue',
       borderWidth: 2,
       opacity: 0.7,
