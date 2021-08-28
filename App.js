@@ -1,24 +1,47 @@
+import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 //custom components
 import Tasks from './components/Task';
 
 export default function App() {
+  const [tasks, setTasks] = useState([]);
+  const [inputVal, setInputVal] = useState('');
+
+  const addTask = (taskName) =>{
+    let newTasks = [...tasks];
+    newTasks.push({taskName: taskName});
+    setTasks(newTasks);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>ur tasks:</Text>
       </View>
       <View style={styles.tasksContainer}>
-        <Tasks props={{taskName: 'task #1'}}></Tasks>
-        <Tasks props={{taskName: 'task #2'}}></Tasks>
-        <Tasks props={{taskName: 'task #3'}}></Tasks>
+        {tasks.length !== 0 ?
+          tasks.map((task,index)=>{
+            return(
+              <Tasks key={index} props={{taskName: task.taskName}}></Tasks>
+            )
+          })
+        :
+          <Text> No tasks yet </Text>
+        }
       </View>
       <View style={styles.inputContainer}>
-        <TextInput style={styles.input}></TextInput>
-        <TouchableOpacity style={styles.button}></TouchableOpacity>
+        <TextInput value={inputVal} style={styles.input}
+        onChangeText={text=>{
+          setInputVal(text);
+        }}
+        />
+        <TouchableOpacity style={styles.button}
+          onPress={()=>{
+            if(inputVal !== '') addTask(inputVal);
+          }}
+        />
       </View>
       <StatusBar />
     </View>
