@@ -18,6 +18,7 @@ export default function App() {
       </View>
       <View style={styles.inputContainer}>
         <TextInput style={styles.input}></TextInput>
+        <TouchableOpacity style={styles.button}></TouchableOpacity>
       </View>
       <StatusBar />
     </View>
@@ -60,6 +61,20 @@ const styles = StyleSheet.create({
     borderColor: 'blue',
     borderRadius: 5,
     borderWidth: 2,
-    width: '90%',
+    width: '80%',
+  },
+  button:{
+    paddingVertical: 15,
+    width: '15%',
+    marginLeft: 'auto',
+    height: '50%',
+    backgroundColor: 'pink',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    borderColor: 'blue',
+    borderRadius: 5,
+    borderWidth: 2,
+    opacity: 0.7,
+    borderRadius: 5
   }
 });
